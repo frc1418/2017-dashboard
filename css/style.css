@@ -110,6 +110,16 @@ svg * {
     -ms-transform-origin: center;
     transform-origin: center;
 }
+.svgsolid{
+  fill:white;
+}
+.svginvis {
+  Stroke: #222;
+  Stroke-width:0;
+}
+.ballicons{
+
+}
 text {
     font-size: 16px;
     letter-spacing: 2px;
