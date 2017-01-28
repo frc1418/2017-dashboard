@@ -110,6 +110,16 @@ svg * {
     -ms-transform-origin: center;
     transform-origin: center;
 }
+.svgsolid{
+  fill:white;
+}
+.svginvis {
+  Stroke: #222;
+  Stroke-width:0;
+}
+.ballicons{
+
+}
 text {
     font-size: 16px;
     letter-spacing: 2px;
@@ -122,10 +132,10 @@ text {
     margin-left: 30px;
     margin-top: 15px;
 }
-#gyro-arm {
-    -webkit-transform-origin: bottom;
-    -ms-transform-origin: bottom;
-    transform-origin: bottom;
+#gyro-robot{
+  -webkit-transform-origin: bottom;
+  -ms-transform-origin: bottom;
+  transform-origin: bottom;
 }
 #gyro-number {
     font-size: 25px;

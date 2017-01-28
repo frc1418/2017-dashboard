@@ -30,14 +30,32 @@
         <svg id="gyro">
             <circle cx="85" cy="85" r="83" />
             <circle cx="85" cy="85" r="50" />
-            <rect id="gyro-arm" x="80" y="5" width="10" height="80" />
+            <g id="gyro-robot">
+              <rect x="80" y="5" width="10" height="80" />
+              <rect x="38.5" y="25" width="10" height="40" />
+              <rect x="121.5" y="25" width="10" height="40" />
+              <rect x="38.5" y="100" width="10" height="40" />
+              <rect x="121.5" y="100" width="10" height="40" />
+              <rect x="45" y="35" width="80" height="100" />
+            </g>
             <text id="gyro-number" x="90" y="115">0º</text>
         </svg>
         <!-- Example robot diagram, arm moves when encoder value changes -->
         <svg id="robot-diagram" width="332" height="450">
-            <text x="40" y="340">Example SVG Robot Diagram</text>
-            <rect x="75" y="360" width="230" height="40" />
-            <rect x="85" y="370" width="210" height="40" />
+            <text x="40" y="80">Example SVG Robot Diagram</text>
+            <circle cx="100" cy="260" r="25" />
+            <rect x="75" y="280" width="230" height="120" />
+            <rect x="85" y="290" width="210" height="120" />
+            <rect x="265" y="360" width="30" height="20" />
+            <circle cx="185" cy="330" r="50" />
+            <rect x="75" y="280" width="230" height="10" />
+            <rect class="svginvis" x="166" y="291" width="120" height="50" />
+            <circle class="svgsolid"cx="185" cy="330" r="20" />
+            <circle cx="185" cy="330" r="10" />
+            <circle class="ballicons" cx="200" cy="365" r="10" />
+            <circle class="ballicons" cx="217" cy="353" r="10" />
+            <circle class="ballicons" cx="180" cy="370" r="10" />
+            <circle class="ballicons" cx="161" cy="360" r="10" />
             <rect id="robot-arm" x="5" y="375" width="80" height="10" />
             <circle cx="100" cy="410" r="25" />
             <circle cx="260" cy="410" r="25" />
@@ -64,6 +82,17 @@
             <p>Adjust arm height</p>
             <input id="arm-position" type="range" min="0" max="1200" value="770">
         </div>
+        <div>
+            <p>Adjust gyro test direction</p>
+            <input id="" type="range" min="0" max="360" value="0">
+        </div>
+        <svg id="camera-buttons" width="200" height="200">
+              <rect id="camera-up" x="65" y="0" width="60" height="50"/>
+              <rect id="camera-left" x="0" y="55" width="60" height="50"/>
+              <rect id="camera-center" x="65" y="55" width="60" height="50"/>
+              <rect id="camera-right" x="130" y="55" width="60" height="50"/>
+              <rect id="camera-down" x="65" y="110" width="60" height="50"/>
+        </svg>
     </aside>
     <script src="/networktables/networktables.js"></script>
     <script src="ui.js"></script>
