@@ -60,10 +60,6 @@
     <aside>
         <!-- Example button which toggles /SmartDashboard/exampleValue NetworkTables value.
             The <p> below then says the value. -->
-        <div id="example-section">
-            <button id="example-button">Change example value</button>
-            <p id="example-readout">Value is undefined</p>
-        </div>
         <!-- Autonomous selector -->
         <div class="select-container">
             <select id="auto-select">
@@ -75,6 +71,11 @@
             <p>Adjust arm height</p>
             <input id="arm-position" type="range" min="0" max="1200" value="770">
         </div>
+        <button id="camera-top">Up</button>
+        <button id="camera-bottom">Down</button>
+        <button id="camera-center">Middle</button>
+        <button id="camera-right">Right</button>
+        <button id="camera-left">Left</button>
     </aside>
     <script src="/networktables/networktables.js"></script>
     <script src="ui.js"></script>
