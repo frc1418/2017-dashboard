@@ -120,7 +120,7 @@ svg * {
 .ballicons{
 
 }
-text {
+.text {
     font-size: 16px;
     letter-spacing: 2px;
     stroke: none;
@@ -154,6 +154,29 @@ text {
 #team {
     font-size: 28px;
     letter-spacing: -1px;
+}
+#camera-top {
+    position: relative;
+    left: 65px;
+}
+#camera-bottom {
+    position: relative;
+    left: 15.9px;
+    top: 70px;
+}
+#camera-center {
+    position: relative;
+    top: 35px;
+    right: 45px;
+}
+#camera-right {
+    position: relative;
+    bottom: 14px;
+}
+#camera-left {
+    position: relative;
+    bottom: 14px;
+    left: 59px;
 }
 aside {
     right: 0;
