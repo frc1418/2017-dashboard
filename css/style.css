@@ -172,11 +172,12 @@ svg * {
 #camera-right {
     position: relative;
     bottom: 14px;
+    left: 115px;
 }
 #camera-left {
     position: relative;
     bottom: 14px;
-    left: 59px;
+    right: 47px;
 }
 aside {
     right: 0;
