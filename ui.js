@@ -23,7 +23,7 @@ var ui = {
 		centerButton:document.getElementById('camera-center'),
 		rightButton:document.getElementById('camera-right'),
 		downButton:document.getElementById('camera-down')
-	}
+	},
 	tuning: {
 		list: document.getElementById('tuning'),
 		button: document.getElementById('tuning-button'),
@@ -51,6 +51,7 @@ function onRobotConnection(connected) {
 }
 
 function onValueChanged(key, value, isNew) {
+	console.log(key + ' is ' + value);
 	// Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
 	if (value == 'true') {
 		value = true;
@@ -132,7 +133,8 @@ function onValueChanged(key, value, isNew) {
 			}
 			NetworkTables.setValue(key, false);
 			break;
-		case '/SmartDashboard/autonomous/options': // Load list of prewritten autonomous modes
+		// TODO: This key violates naming policies. It's a robotpy inbuilt name, also.
+		case '/SmartDashboard/Autonomous Mode/options': // Load list of prewritten autonomous modes
 			// Clear previous list
 			while (ui.autoSelect.firstChild) {
 				ui.autoSelect.removeChild(ui.autoSelect.firstChild);
@@ -146,7 +148,7 @@ function onValueChanged(key, value, isNew) {
 			// Set value to the already-selected mode. If there is none, nothing will happen.
 			ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedMode');
 			break;
-		case '/SmartDashboard/autonomous/selected':
+		case '/SmartDashboard/Autonomous Mode/selected':
 			ui.autoSelect.value = value;
 			break;
 	}

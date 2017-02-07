@@ -17,10 +17,10 @@ function createWindow() {
     // Start python server.
     if (process.platform === 'win32') {
         // If on Windows, use the batch command (py -3 ./server.py).
-        server = require('child_process').spawn('py', ['-3', '-m', 'pynetworktables2js']);
+        server = require('child_process').spawn('py', ['-3', '-m', 'pynetworktables2js', '--robot', 'roborio-1418-frc.local']);
     } else {
         // If on unix-like/other OSes, use bash command (python3 ./server.py).
-        server = require('child_process').spawn('python3', ['-m', 'pynetworktables2js']);
+        server = require('child_process').spawn('python3', ['-m', 'pynetworktables2js', '--robot', 'roborio-1418-frc.local']);
     }
 
 	// Create the browser window.
