@@ -17,6 +17,13 @@ var ui = {
 		button: document.getElementById('example-button'),
 		readout: document.getElementById('example-readout')
 	},
+	cameraButtons:{
+		upButton:document.getElementById('camera-up'),
+		leftButton:document.getElementById('camera-left'),
+		centerButton:document.getElementById('camera-center'),
+		rightButton:document.getElementById('camera-right'),
+		downButton:document.getElementById('camera-down')
+	}
 	tuning: {
 		list: document.getElementById('tuning'),
 		button: document.getElementById('tuning-button'),
@@ -212,6 +219,22 @@ function onValueChanged(key, value, isNew) {
 ui.example.button.onclick = function() {
 	// Set NetworkTables values to the opposite of whether button has active class.
 	NetworkTables.setValue('/SmartDashboard/exampleVariable', this.className != 'active');
+};
+// moves Camera
+ui.cameraButtons.upButton.onclick = function() {
+
+};
+ui.cameraButtons.leftButton.onclick = function() {
+
+};
+ui.cameraButtons.centerButton.onclick = function() {
+
+};
+ui.cameraButtons.rightButton.onclick = function() {
+
+};
+ui.cameraButtons.downButton.onclick = function() {
+
 };
 
 // Reset gyro value to 0 on click
