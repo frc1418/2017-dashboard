@@ -16,6 +16,12 @@ body {
     overflow: hidden;
     background: #222;
 }
+.cameraButton > rect {
+    transition: fill .5s;
+}
+.cameraButton > rect:hover {
+    fill: #fff;
+}
 button,
 input[type="text"],
 input[type="number"],
@@ -120,7 +126,7 @@ svg * {
 .ballicons{
 
 }
-.text {
+text {
     font-size: 16px;
     letter-spacing: 2px;
     stroke: none;
@@ -132,10 +138,10 @@ svg * {
     margin-left: 30px;
     margin-top: 15px;
 }
-#gyro-arm {
-    -webkit-transform-origin: bottom;
-    -ms-transform-origin: bottom;
-    transform-origin: bottom;
+#gyro-robot{
+  -webkit-transform-origin: bottom;
+  -ms-transform-origin: bottom;
+  transform-origin: bottom;
 }
 #gyro-number {
     font-size: 25px;
@@ -154,30 +160,6 @@ svg * {
 #team {
     font-size: 28px;
     letter-spacing: -1px;
-}
-#camera-top {
-    position: relative;
-    left: 65px;
-}
-#camera-bottom {
-    position: relative;
-    left: 15.9px;
-    top: 70px;
-}
-#camera-center {
-    position: relative;
-    top: 35px;
-    right: 45px;
-}
-#camera-right {
-    position: relative;
-    bottom: 14px;
-    left: 115px;
-}
-#camera-left {
-    position: relative;
-    bottom: 14px;
-    right: 47px;
 }
 aside {
     right: 0;
