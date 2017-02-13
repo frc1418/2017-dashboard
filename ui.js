@@ -17,12 +17,12 @@ var ui = {
 		button: document.getElementById('example-button'),
 		readout: document.getElementById('example-readout')
 	},
-	cameraButtons:{
-		upButton:document.getElementById('camera-up'),
-		leftButton:document.getElementById('camera-left'),
-		centerButton:document.getElementById('camera-center'),
-		rightButton:document.getElementById('camera-right'),
-		downButton:document.getElementById('camera-down')
+	cameraButtons: {
+		upButton: document.getElementById('camera-up'),
+		leftButton: document.getElementById('camera-left'),
+		centerButton: document.getElementById('camera-center'),
+		rightButton: document.getElementById('camera-right'),
+		downButton: document.getElementById('camera-down')
 	},
 	tuning: {
 		list: document.getElementById('tuning'),
@@ -67,7 +67,7 @@ function onValueChanged(key, value, isNew) {
 			if (ui.gyro.visualVal < 0) { // Corrects for negative values
 				ui.gyro.visualVal += 360;
 			}
-			ui.gyro.arm.style.transform = ('rotate(' + ui.gyro.visualVal + 'deg)');
+			//ui.gyro.arm.style.transform = ('rotate(' + ui.gyro.visualVal + 'deg)');
 			ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
 			break;
 			// The following case is an example, for a robot with an arm at the front.
