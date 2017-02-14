@@ -16,6 +16,12 @@ body {
     overflow: hidden;
     background: #222;
 }
+.cameraButton > rect {
+    transition: fill .5s;
+}
+.cameraButton > rect:hover {
+    fill: #fff;
+}
 button,
 input[type="text"],
 input[type="number"],
