@@ -16,11 +16,7 @@ body {
     overflow: hidden;
     background: #222;
 }
-button,
-input[type="text"],
-input[type="number"],
-.select-container,
-select {
+button, input[type="text"], input[type="number"], .select-container, select {
     color: white;
     background: #444;
     border: none;
@@ -37,10 +33,12 @@ select {
     border: none;
     background: none;
     color: white;
-    height: 25px;
+    height: 30px;
 }
-input[type="text"],
-input[type="number"] {
+option {
+    color: #333;
+}
+input[type="text"], input[type="number"] {
     cursor: text;
 }
 input[type="checkbox"] {
@@ -49,7 +47,8 @@ input[type="checkbox"] {
 }
 
 /* Major interface panes, aside, article, header, etc. */
-body > * {
+
+body>* {
     padding: 10px;
     position: fixed;
     overflow: scroll;
@@ -110,16 +109,14 @@ svg * {
     -ms-transform-origin: center;
     transform-origin: center;
 }
-.svgsolid{
-  fill:white;
+.svgsolid {
+    fill: white;
 }
 .svginvis {
-  Stroke: #222;
-  Stroke-width:0;
+    Stroke: #222;
+    Stroke-width: 0;
 }
-.ballicons{
-
-}
+.ballicons {}
 text {
     font-size: 16px;
     letter-spacing: 2px;
@@ -132,10 +129,10 @@ text {
     margin-left: 30px;
     margin-top: 15px;
 }
-#gyro-robot{
-  -webkit-transform-origin: bottom;
-  -ms-transform-origin: bottom;
-  transform-origin: bottom;
+#gyro-robot {
+    -webkit-transform-origin: bottom;
+    -ms-transform-origin: bottom;
+    transform-origin: bottom;
 }
 #gyro-number {
     font-size: 25px;
@@ -161,6 +158,6 @@ aside {
     width: 15vw;
     height: 100vh;
 }
-aside > * {
+aside>* {
     margin-bottom: 20px;
 }

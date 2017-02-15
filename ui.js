@@ -269,7 +269,7 @@ ui.tuning.get.onclick = function() {
 
 // Update NetworkTables when autonomous selector is changed
 ui.autoSelect.onchange = function() {
-	NetworkTables.setValue('/SmartDashboard/autonomous/selected', this.value);
+	NetworkTables.setValue('/SmartDashboard/Autonomous Mode/selected', this.value);
 };
 
 // Get value of arm height slider when it's adjusted
