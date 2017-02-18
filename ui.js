@@ -33,7 +33,15 @@ var ui = {
 		get: document.getElementById('get')
 	},
 	autoSelect: document.getElementById('auto-select'),
-    armPosition: document.getElementById('arm-position')
+    armPosition: document.getElementById('arm-position'),
+    camera: {
+		viewer: document.getElementById('camera'),
+		id: 0,
+		srcs: [ // Will default to first camera
+            'http://10.14.18.2:1181/?action=stream',
+            'http://10.14.18.2:1182/?action=stream'
+        ]
+    }
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -275,4 +283,10 @@ ui.autoSelect.onchange = function() {
 // Get value of arm height slider when it's adjusted
 ui.armPosition.oninput = function() {
 	NetworkTables.setValue('/SmartDashboard/arm/encoder', parseInt(this.value));
+};
+ui.camera.viewer.onclick = function() {
+    ui.camera.id += 1;
+	if (ui.camera.id === ui.camera.srcs.length) ui.camera.id = 0;
+	ui.camera.viewer.style.backgroundImage = 'url(' + ui.camera.srcs[ui.camera.id] + ')';
+	console.log('Camera stream source switched to ' + ui.camera.viewer.style.backgroundImage)
 };
