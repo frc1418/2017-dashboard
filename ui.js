@@ -18,11 +18,11 @@ var ui = {
 		readout: document.getElementById('example-readout')
 	},
 	cameraButtons: {
-		upButton: document.getElementById('camera-up'),
-		leftButton: document.getElementById('camera-left'),
-		centerButton: document.getElementById('camera-center'),
-		rightButton: document.getElementById('camera-right'),
-		downButton: document.getElementById('camera-down')
+		up: document.getElementById('camera-up'),
+		left: document.getElementById('camera-left'),
+		center: document.getElementById('camera-center'),
+		right: document.getElementById('camera-right'),
+		down: document.getElementById('camera-down')
 	},
 	tuning: {
 		list: document.getElementById('tuning'),
@@ -34,6 +34,10 @@ var ui = {
 	},
 	autoSelect: document.getElementById('auto-select'),
     armPosition: document.getElementById('arm-position'),
+	tankPressure: {
+		gauge: document.getElementById('tank-gauge'),
+		readout: document.getElementById('tank-readout')
+	}
     camera: {
 		viewer: document.getElementById('camera'),
 		id: 0,
@@ -46,8 +50,6 @@ var ui = {
         select: document.getElementById('theme-select'),
         link: document.getElementById('theme-link')
     }
-
-
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -165,11 +167,21 @@ function onValueChanged(key, value, isNew) {
 		case '/SmartDashboard/Autonomous Mode/selected':
 			ui.autoSelect.value = value;
 			break;
+		case '/SmartDashboard/pneumatics/tank_pressure':
+			ui.tankPressure.gauge.style.height = value + 'px';
+			if (value < 20 || value > 100) {
+				ui.tankPressure.gauge.style.background = 'red';
+			} else if (value < 40 || value > 80) {
+				ui.tankPressure.gauge.style.background = 'yellow';
+			} else {
+				ui.tankPressure.gauge.style.background = 'green';
+			}
+			ui.tankPressure.readout.innerHTML = Math.round(value) + 'psi';
+			break;
 		case '/SmartDashboard/theme':
             ui.theme.select.value = value;
             ui.theme.link.href = 'css/' + value + '.css';
             break;
-
 	}
 
 	// The following code manages tuning section of the interface.
@@ -236,25 +248,20 @@ function onValueChanged(key, value, isNew) {
 	}
 }
 
-// The rest of the doc is listeners for UI elements being clicked on
-ui.example.button.onclick = function() {
-	// Set NetworkTables values to the opposite of whether button has active class.
-	NetworkTables.setValue('/SmartDashboard/exampleVariable', this.className != 'active');
-};
-// moves Camera
-ui.cameraButtons.upButton.onclick = function() {
+// Move Camera
+ui.cameraButtons.up.onclick = function() {
 
 };
-ui.cameraButtons.leftButton.onclick = function() {
+ui.cameraButtons.left.onclick = function() {
 
 };
-ui.cameraButtons.centerButton.onclick = function() {
+ui.cameraButtons.center.onclick = function() {
 
 };
-ui.cameraButtons.rightButton.onclick = function() {
+ui.cameraButtons.right.onclick = function() {
 
 };
-ui.cameraButtons.downButton.onclick = function() {
+ui.cameraButtons.down.onclick = function() {
 
 };
 
