@@ -1,0 +1,32 @@
+body > * {
+    background: white;
+}
+body,
+header,
+button,
+input[type="text"],
+input[type="number"],
+.select-container,
+select {
+    color: #333;
+    background: white;
+}
+button,
+input[type="text"],
+input[type="number"],
+.select-container,
+select {
+    background: #eee;
+}
+svg *:not(text) {
+    stroke: #333;
+    fill: white;
+    --svg-fill-color: white;
+    --svg-fill-color-inverse: #333;
+}
+text {
+    fill: #333;
+}
+#camera {
+    background-color: #eee;
+}

@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>FRC Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
+    <link id="theme-link" rel="stylesheet" href>
 </head>
 
 <body>
@@ -14,6 +15,16 @@
         <!-- Tells whether robot is connected to dashboard. -->
         <div id="robot-state">Unknown state</div>
         <button id="tuning-button">Tuning</button>
+        <p>Theme:</p>
+        <div class="select-container">
+            <select id='theme-select'>
+                <option>dark</option>
+                <option>light</option>
+                <option>red</option>
+                <option>blue</option>
+                <option>rainbow</option>
+            </select>
+        </div>
     </header>
     <!-- You'll need to mess around with the CSS of #camera (found in css/style.css) to get it to work.
         More explanation in that CSS rule. -->

@@ -41,7 +41,13 @@ var ui = {
             'http://10.14.18.2:1181/?action=stream',
             'http://10.14.18.2:1182/?action=stream'
         ]
+    },
+    theme: {
+        select: document.getElementById('theme-select'),
+        link: document.getElementById('theme-link')
     }
+
+
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -159,6 +165,11 @@ function onValueChanged(key, value, isNew) {
 		case '/SmartDashboard/Autonomous Mode/selected':
 			ui.autoSelect.value = value;
 			break;
+		case '/SmartDashboard/theme':
+            ui.theme.select.value = value;
+            ui.theme.link.href = 'css/' + value + '.css';
+            break;
+
 	}
 
 	// The following code manages tuning section of the interface.
@@ -289,4 +300,7 @@ ui.camera.viewer.onclick = function() {
 	if (ui.camera.id === ui.camera.srcs.length) ui.camera.id = 0;
 	ui.camera.viewer.style.backgroundImage = 'url(' + ui.camera.srcs[ui.camera.id] + ')';
 	console.log('Camera stream source switched to ' + ui.camera.viewer.style.backgroundImage)
+};
+ui.theme.select.onchange = function() {
+    NetworkTables.setValue('/SmartDashboard/theme', this.value);
 };
