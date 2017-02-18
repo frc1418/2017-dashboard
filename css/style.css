@@ -161,3 +161,17 @@ aside {
 aside>* {
     margin-bottom: 20px;
 }
+#tank-label {
+}
+#tank-gauge-container {
+    margin-left: 10px;
+    height: 120px;
+    background: #444;
+    width: 20px;
+}
+#tank-gauge {
+    width: 20px;
+    background: #555;
+    position: relative;
+    bottom: -10px;
+}
