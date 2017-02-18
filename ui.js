@@ -38,6 +38,18 @@ var ui = {
 		gauge: document.getElementById('tank-gauge'),
 		readout: document.getElementById('tank-readout')
 	}
+    camera: {
+		viewer: document.getElementById('camera'),
+		id: 0,
+		srcs: [ // Will default to first camera
+            'http://10.14.18.2:1181/?action=stream',
+            'http://10.14.18.2:1182/?action=stream'
+        ]
+    },
+    theme: {
+        select: document.getElementById('theme-select'),
+        link: document.getElementById('theme-link')
+    }
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -166,6 +178,10 @@ function onValueChanged(key, value, isNew) {
 			}
 			ui.tankPressure.readout.innerHTML = Math.round(value) + 'psi';
 			break;
+		case '/SmartDashboard/theme':
+            ui.theme.select.value = value;
+            ui.theme.link.href = 'css/' + value + '.css';
+            break;
 	}
 
 	// The following code manages tuning section of the interface.
@@ -285,4 +301,13 @@ ui.autoSelect.onchange = function() {
 // Get value of arm height slider when it's adjusted
 ui.armPosition.oninput = function() {
 	NetworkTables.setValue('/SmartDashboard/arm/encoder', parseInt(this.value));
+};
+ui.camera.viewer.onclick = function() {
+    ui.camera.id += 1;
+	if (ui.camera.id === ui.camera.srcs.length) ui.camera.id = 0;
+	ui.camera.viewer.style.backgroundImage = 'url(' + ui.camera.srcs[ui.camera.id] + ')';
+	console.log('Camera stream source switched to ' + ui.camera.viewer.style.backgroundImage)
+};
+ui.theme.select.onchange = function() {
+    NetworkTables.setValue('/SmartDashboard/theme', this.value);
 };
