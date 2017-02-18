@@ -77,12 +77,6 @@
     </article>
     <!-- The sidebar of the dashboard. Designed for smaller control elements like selection boxes and small buttons. -->
     <aside>
-        <!-- Example button which toggles /SmartDashboard/exampleValue NetworkTables value.
-            The <p> below then says the value. -->
-        <div id="example-section">
-            <button id="example-button">Change example value</button>
-            <p id="example-readout">Value is undefined</p>
-        </div>
         <!-- Autonomous selector -->
         <div class="select-container">
             <select id="auto-select">
@@ -105,6 +99,13 @@
               <rect id="camera-right" x="130" y="55" width="60" height="50"/>
               <rect id="camera-down" x="65" y="110" width="60" height="50"/>
         </svg>
+        <div id="tank-pressure">
+            <div id="tank-label">TANK</div>
+            <div id="tank-gauge-container">
+                <div id="tank-gauge"></div>
+            </div>
+            <div id="tank-readout"></div>
+        </div>
     </aside>
     <script src="/networktables/networktables.js"></script>
     <script src="ui.js"></script>
