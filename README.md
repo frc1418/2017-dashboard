@@ -26,6 +26,10 @@ If you're going to be using the preferred method of using the dashboard (as an a
 ### Using dashboard as Application
 The preferred method of using the dashboard is to run it using the [Electron](http://electron.atom.io) framework. Your dashboard will be its own application, and will be easy to manipulate.
 
+If you need to interact through the robotpy simulator or similar, run the following command. If not, skip on.
+
+    python3 -m pynetworktables2js --robot 127.0.0.1
+
 While in the dashboard directory, run:
 
     npm start
