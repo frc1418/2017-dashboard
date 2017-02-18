@@ -92,6 +92,12 @@ header {
     fill: var(--svg-fill-color-inverse);
 
 }
+#field-centric {
+    fill: #fe3131;
+}
+#fc-label {
+    fill: white;
+}
 #tuning {
     width: 50vw;
     height: 80vh;

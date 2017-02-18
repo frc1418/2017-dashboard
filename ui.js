@@ -4,6 +4,9 @@ var ui = {
 	robotState: document.getElementById('robot-state'),
 	gyro: {
 		container: document.getElementById('gyro'),
+		fieldCentric: document.getElementById('field-centric'),
+		fcToggle: 1,
+		fcLabel: document.getElementById('fc-label'),
 		val: 0,
 		offset: 0,
 		visualVal: 0,
@@ -182,6 +185,14 @@ function onValueChanged(key, value, isNew) {
             ui.theme.select.value = value;
             ui.theme.link.href = 'css/' + value + '.css';
             break;
+		case '/SmartDashboard/drive/drive/field_centric':
+			if (ui.gyro.fcToggle == 0) {
+				ui.gyro.fieldCentric.style.fill = 'green';
+				ui.gyro.fcToggle = 1;
+			} else {
+				ui.gyro.fieldCentric.style.fill = '#fe3131'
+				ui.gyro.fcToggle = 0;
+			}
 	}
 
 	// The following code manages tuning section of the interface.
