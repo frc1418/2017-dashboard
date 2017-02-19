@@ -279,6 +279,7 @@ ui.cameraButtons.down.onclick = function() {
 // Reset gyro value to 0 on click
 ui.gyro.container.onclick = function() {
 	// Store previous gyro val, will now be subtracted from val for callibration
+  
 	ui.gyro.offset = ui.gyro.val;
 	// Trigger the gyro to recalculate value.
 	onValueChanged('/SmartDashboard/drive/navX/yaw', ui.gyro.val);
@@ -308,7 +309,6 @@ ui.tuning.get.onclick = function() {
 ui.autoSelect.onchange = function() {
 	NetworkTables.setValue('/SmartDashboard/Autonomous Mode/selected', this.value);
 };
-
 ui.camera.viewer.onclick = function() {
     ui.camera.id += 1;
 	if (ui.camera.id === ui.camera.srcs.length) ui.camera.id = 0;
