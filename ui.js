@@ -40,7 +40,7 @@ var ui = {
 	tankPressure: {
 		gauge: document.getElementById('tank-gauge'),
 		readout: document.getElementById('tank-readout')
-	}
+	},
     camera: {
 		viewer: document.getElementById('camera'),
 		id: 0,
@@ -307,11 +307,6 @@ ui.tuning.get.onclick = function() {
 // Update NetworkTables when autonomous selector is changed
 ui.autoSelect.onchange = function() {
 	NetworkTables.setValue('/SmartDashboard/Autonomous Mode/selected', this.value);
-};
-
-// Get value of arm height slider when it's adjusted
-ui.armPosition.oninput = function() {
-	NetworkTables.setValue('/SmartDashboard/arm/encoder', parseInt(this.value));
 };
 ui.camera.viewer.onclick = function() {
     ui.camera.id += 1;
