@@ -60,24 +60,24 @@ body>* {
     font-family: monospace;
     display: block;
     height: 20vh;
-    width: 30vw;
+    width: 20vw;
     top: 0;
-    left: 0;
+    left: 35vw;
     font-size: 20vh;
     line-height: .8;
 }
 header {
     width: 20vw;
-    height: 20vh;
+    height: 25vh;
     top: 0;
-    left: 30vw;
+    left: 55vw;
     color: white;
 }
 #camera {
     padding: 0;
     position: fixed;
     bottom: 0;
-    left: 0;
+    left: 35vw;
     width: 50vw;
     height: 80vh;
     overflow: hidden;
@@ -102,7 +102,7 @@ header {
     width: 50vw;
     height: 80vh;
     bottom: 0;
-    left: 0;
+    left: 35vw;
 }
 #tuning div {
     margin: 20px 0;
@@ -112,7 +112,7 @@ header {
 }
 article {
     top: 0;
-    left: 50vw;
+    left: 0;
     height: 100vh;
     width: 35vw;
 }
@@ -170,6 +170,7 @@ text {
 aside {
     right: 0;
     top: 0;
+    padding-left: 20px;
     width: 15vw;
     height: 100vh;
 }

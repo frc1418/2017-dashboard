@@ -40,7 +40,7 @@ var ui = {
 	tankPressure: {
 		gauge: document.getElementById('tank-gauge'),
 		readout: document.getElementById('tank-readout')
-	}
+	},
     camera: {
 		viewer: document.getElementById('camera'),
 		id: 0,
@@ -309,16 +309,16 @@ ui.autoSelect.onchange = function() {
 	NetworkTables.setValue('/SmartDashboard/Autonomous Mode/selected', this.value);
 };
 
-// Get value of arm height slider when it's adjusted
-ui.armPosition.oninput = function() {
-	NetworkTables.setValue('/SmartDashboard/arm/encoder', parseInt(this.value));
-};
 ui.camera.viewer.onclick = function() {
     ui.camera.id += 1;
 	if (ui.camera.id === ui.camera.srcs.length) ui.camera.id = 0;
 	ui.camera.viewer.style.backgroundImage = 'url(' + ui.camera.srcs[ui.camera.id] + ')';
 	console.log('Camera stream source switched to ' + ui.camera.viewer.style.backgroundImage)
 };
+
+// Default to red
+NetworkTables.setValue('/SmartDashboard/theme', 'red');
+
 ui.theme.select.onchange = function() {
     NetworkTables.setValue('/SmartDashboard/theme', this.value);
 };
