@@ -80,7 +80,7 @@ function onValueChanged(key, value, isNew) {
 
 	// This switch statement chooses which UI element to update when a NetworkTables variable changes.
 	switch (key) {
-		case '/SmartDashboard/drive/navX/yaw': // Gyro rotation
+		case '/SmartDashboard/drive/navx_yaw': // Gyro rotation
 			ui.gyro.val = value;
 			ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
 			if (ui.gyro.visualVal < 0) { // Corrects for negative values
@@ -171,10 +171,10 @@ function onValueChanged(key, value, isNew) {
 			ui.autoSelect.value = value;
 			break;
 		case '/SmartDashboard/pneumatics/tank_pressure':
-			ui.tankPressure.gauge.style.height = value + 'px';
-			if (value < 20 || value > 100) {
+			ui.tankPressure.gauge.style.width = value + 'px';
+			if (value < 20) {
 				ui.tankPressure.gauge.style.background = 'red';
-			} else if (value < 40 || value > 80) {
+			} else if (value < 60) {
 				ui.tankPressure.gauge.style.background = 'yellow';
 			} else {
 				ui.tankPressure.gauge.style.background = 'green';
@@ -193,6 +193,14 @@ function onValueChanged(key, value, isNew) {
 				ui.gyro.fieldCentric.style.fill = '#fe3131'
 				ui.gyro.fcToggle = 0;
 			}
+		case '/SmartDashboard/drive/fr_module/degrees':
+			document.getElementById('fr_module').style.transform = 'rotate(' + value + 'deg)';
+		case '/SmartDashboard/drive/fl_module/degrees':
+			document.getElementById('fl_module').style.transform = 'rotate(' + value + 'deg)';
+		case '/SmartDashboard/drive/rl_module/degrees':
+			document.getElementById('rl_module').style.transform = 'rotate(' + value + 'deg)';
+		case '/SmartDashboard/drive/rr_module/degrees':
+			document.getElementById('rr_module').style.transform = 'rotate(' + value + 'deg)';
 	}
 
 	// The following code manages tuning section of the interface.
@@ -279,10 +287,10 @@ ui.cameraButtons.down.onclick = function() {
 // Reset gyro value to 0 on click
 ui.gyro.container.onclick = function() {
 	// Store previous gyro val, will now be subtracted from val for callibration
-  
+
 	ui.gyro.offset = ui.gyro.val;
 	// Trigger the gyro to recalculate value.
-	onValueChanged('/SmartDashboard/drive/navX/yaw', ui.gyro.val);
+	onValueChanged('/SmartDashboard/drive/navx_yaw', ui.gyro.val);
 };
 
 // Open tuning section when button is clicked

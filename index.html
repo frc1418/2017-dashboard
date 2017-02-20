@@ -38,20 +38,19 @@
     <!-- The main body of the dashboard, by default contains the gyro monitor and the robot diagram -->
     <article>
         <!-- Gyroscope -->
-        <svg id="gyro">
-            <circle cx="85" cy="85" r="83" />
-            <circle cx="85" cy="85" r="50" />
+        <svg id="gyro" width="400" height="400">
+            <circle cx="160" cy="160" r="150" />
+            <circle cx="160" cy="160" r="100" />
             <g id="gyro-robot">
-              <rect x="80" y="5" width="10" height="80" />
-              <rect x="38.5" y="25" width="10" height="40" />
-              <rect x="121.5" y="25" width="10" height="40" />
-              <rect x="38.5" y="100" width="10" height="40" />
-              <rect x="121.5" y="100" width="10" height="40" />
-              <rect x="45" y="35" width="80" height="100" />
-              <circle id="field-centric" cx="85" cy="65" r="20" />
-              <text id="fc-label" x="74" y="71">FC</text>
+                <rect x="70" y="60" width="180" height="200" />
+                <rect x="90" y="70" width="15" height="40" id="fl_module" />
+                <rect x="215" y="70" width="15" height="40" id="fr_module" />
+                <rect x="90" y="210" width="15" height="40" id="rl_module" />
+                <rect x="215" y="210" width="15" height="40" id="rr_module" />
+                <circle id="field-centric" cx="160" cy="120" r="20" />
+                <text id="fc-label" x="148" y="126">FC</text>
+                <text id="gyro-number" x="160" y="200">0º</text>
             </g>
-            <text id="gyro-number" x="90" y="115">0º</text>
         </svg>
         <!-- Example robot diagram, arm moves when encoder value changes -->
         <svg id="robot-diagram" width="332" height="450">
@@ -91,11 +90,11 @@
               <rect id="camera-down" x="55" y="110" width="50" height="50"/>
         </svg>
         <div id="tank-pressure">
-            <div id="tank-label">TANK</div>
+            <div id="tank-label">TANK - </div>
+            <div id="tank-readout">??psi</div>
             <div id="tank-gauge-container">
                 <div id="tank-gauge"></div>
             </div>
-            <div id="tank-readout">??psi</div>
         </div>
     </aside>
     <script src="/networktables/networktables.js"></script>

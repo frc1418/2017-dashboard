@@ -60,7 +60,7 @@ body>* {
     font-family: monospace;
     display: block;
     height: 20vh;
-    width: 20vw;
+    width: 25vw;
     top: 0;
     left: 35vw;
     font-size: 20vh;
@@ -70,7 +70,7 @@ header {
     width: 20vw;
     height: 25vh;
     top: 0;
-    left: 55vw;
+    left: 60vw;
     color: white;
 }
 #camera {
@@ -141,10 +141,6 @@ text {
     fill: white;
 }
 #gyro {
-    width: 175px;
-    height: 175px;
-    margin-left: 30px;
-    margin-top: 15px;
 }
 #gyro-robot {
     -webkit-transform-origin: bottom;
@@ -179,17 +175,16 @@ aside {
 aside>* {
     margin-bottom: 20px;
 }
-#tank-label {
+#tank-label, #tank-readout {
+    display: inline;
 }
 #tank-gauge-container {
-    margin-left: 10px;
-    height: 120px;
+    height: 20px;
+    width: 120px;
     background: #444;
-    width: 20px;
+    overflow: hidden;
 }
 #tank-gauge {
-    width: 20px;
+    height: 20px;
     background: #555;
-    position: relative;
-    bottom: -10px;
 }
