@@ -13,13 +13,7 @@ var ui = {
 		arm: document.getElementById('gyro-arm'),
 		number: document.getElementById('gyro-number')
 	},
-	robotDiagram: {
-		arm: document.getElementById('robot-arm')
-	},
-	example: {
-		button: document.getElementById('example-button'),
-		readout: document.getElementById('example-readout')
-	},
+	robotDiagram: {},
 	cameraButtons: {
 		up: document.getElementById('camera-up'),
 		left: document.getElementById('camera-left'),
@@ -36,7 +30,6 @@ var ui = {
 		get: document.getElementById('get')
 	},
 	autoSelect: document.getElementById('auto-select'),
-    armPosition: document.getElementById('arm-position'),
 	tankPressure: {
 		gauge: document.getElementById('tank-gauge'),
 		readout: document.getElementById('tank-readout')
@@ -83,10 +76,9 @@ function onValueChanged(key, value, isNew) {
 		case '/SmartDashboard/drive/navx_yaw': // Gyro rotation
 			ui.gyro.val = value;
 			ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
-			if (ui.gyro.visualVal < 0) { // Corrects for negative values
-				ui.gyro.visualVal += 360;
-			}
-			//ui.gyro.arm.style.transform = ('rotate(' + ui.gyro.visualVal + 'deg)');
+			if (ui.gyro.visualVal < 0) ui.gyro.visualVal += 360; // Corrects for negative values
+
+			ui.gyro.arm.style.transform = ('rotate(' + ui.gyro.visualVal + 'deg)');
 			ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
 			break;
 			// The following case is an example, for a robot with an arm at the front.
@@ -269,19 +261,24 @@ function onValueChanged(key, value, isNew) {
 
 // Move Camera
 ui.cameraButtons.up.onclick = function() {
-
+	NetworkTables.setValue('/camera/gimbal/yaw', 0.5);
+	NetworkTables.setValue('/camera/gimbal/pitch', 1);
 };
 ui.cameraButtons.left.onclick = function() {
-
+	NetworkTables.setValue('/camera/gimbal/yaw', 1);
+	NetworkTables.setValue('/camera/gimbal/pitch', 0.5);
 };
 ui.cameraButtons.center.onclick = function() {
-
+	NetworkTables.setValue('/camera/gimbal/yaw', 0.5);
+	NetworkTables.setValue('/camera/gimbal/pitch', 0.5);
 };
 ui.cameraButtons.right.onclick = function() {
-
+	NetworkTables.setValue('/camera/gimbal/yaw', 0);
+	NetworkTables.setValue('/camera/gimbal/pitch', 0.5);
 };
 ui.cameraButtons.down.onclick = function() {
-
+	NetworkTables.setValue('/camera/gimbal/yaw', 0.5);
+	NetworkTables.setValue('/camera/gimbal/pitch', 0);
 };
 
 // Reset gyro value to 0 on click
@@ -290,6 +287,7 @@ ui.gyro.container.onclick = function() {
 
 	ui.gyro.offset = ui.gyro.val;
 	// Trigger the gyro to recalculate value.
+	// Do as I say, not as I do.
 	onValueChanged('/SmartDashboard/drive/navx_yaw', ui.gyro.val);
 };
 
