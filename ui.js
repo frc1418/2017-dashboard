@@ -73,7 +73,7 @@ function onValueChanged(key, value, isNew) {
 
 	// This switch statement chooses which UI element to update when a NetworkTables variable changes.
 	switch (key) {
-		case '/SmartDashboard/drive/navx_yaw': // Gyro rotation
+		case '/SmartDashboard/drive/drive/navx_yaw': // Gyro rotation
 			ui.gyro.val = value;
 			ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
 			if (ui.gyro.visualVal < 0) ui.gyro.visualVal += 360; // Corrects for negative values
@@ -288,7 +288,7 @@ ui.gyro.container.onclick = function() {
 	ui.gyro.offset = ui.gyro.val;
 	// Trigger the gyro to recalculate value.
 	// Do as I say, not as I do.
-	onValueChanged('/SmartDashboard/drive/navx_yaw', ui.gyro.val);
+	onValueChanged('/SmartDashboard/drive/drive/navx_yaw', ui.gyro.val);
 };
 
 // Open tuning section when button is clicked
