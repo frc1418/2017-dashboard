@@ -94,7 +94,7 @@ function onRobotConnection(connected) {
 }
 
 function onValueChanged(key, value, isNew) {
-	console.log(key + ' is ' + value);
+	//console.log(key + ' is ' + value);
 	// Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
 	if (value == 'true') {
 		value = true;
@@ -207,15 +207,20 @@ function onValueChanged(key, value, isNew) {
 				ui.gyro.fieldCentric.style.fill = '#fe3131'
 				ui.gyro.fcToggle = 0;
 			}
+			break;
 		case '/SmartDashboard/drive/fr_module/degrees':
 			document.getElementById('fr_module').style.transform = 'rotate(' + value + 'deg)';
+			break;
 		case '/SmartDashboard/drive/fl_module/degrees':
 			document.getElementById('fl_module').style.transform = 'rotate(' + value + 'deg)';
+			break;
 		case '/SmartDashboard/drive/rl_module/degrees':
 			document.getElementById('rl_module').style.transform = 'rotate(' + value + 'deg)';
+			break;
 		case '/SmartDashboard/drive/rr_module/degrees':
 			document.getElementById('rr_module').style.transform = 'rotate(' + value + 'deg)';
-		case '/SmartDashboard/camera':
+			break;
+		case '/SmartDashboard/camera_id':
 			ui.camera.id = value;
 			ui.camera.viewer.style.backgroundImage = 'url(' + ui.camera.srcs[ui.camera.id] + ')';
 			console.log('Camera stream source switched to ' + ui.camera.viewer.style.backgroundImage);
@@ -348,9 +353,9 @@ ui.auto.shoot.onchange = function() {
 }
 
 ui.camera.viewer.onclick = function() {
-    ui.camera.id += 1;
+    ui.camera.id++;
 	if (ui.camera.id === ui.camera.srcs.length) ui.camera.id = 0;
-	NetworkTables.putValue('/SmartDashboard/camera', ui.camera.id);
+	NetworkTables.putValue('/SmartDashboard/camera_id', ui.camera.id);
 };
 
 ui.theme.select.onchange = function() {
