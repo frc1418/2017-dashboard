@@ -29,7 +29,37 @@ var ui = {
 		set: document.getElementById('set'),
 		get: document.getElementById('get')
 	},
-	autoSelect: document.getElementById('auto-select'),
+	auto: {
+		button: document.getElementById('auto-button'),
+		panel: document.getElementById('auto'),
+		field: {
+			positions: document.getElementsByName('field-positions'),
+			getPosition: function() {
+				// TODO: Rewrite as `i in x` for cleanliness
+				for (i = 0; i < ui.auto.field.positions.length; i++)
+				    if (ui.auto.field.positions[i].checked) {
+				        return ui.auto.field.positions[i].value;
+				        break;
+				    }
+			},
+			setPosition: function(pos) {
+				// TODO: Rewrite as `i in x` for cleanliness
+				for (i = 0; i < ui.auto.field.positions.length; i++)
+				    if (ui.auto.field.positions[i].value == pos) {
+				        return ui.auto.field.positions[i].value;
+				        break;
+				    }
+			}
+		},
+		shoot: document.getElementById('shoot'),
+		select: document.getElementById('auto-select'),
+		warning: document.getElementById('auto-warning'),
+		updateWarning: function() {
+			// TODO: Check any additional auto configurations that should be present
+			if (NetworkTables.getValue('/SmartDashboard/Autonomous Mode/selected') == '' || !ui.auto.field.getPosition())
+				ui.autonomous.warning.display = 'block';
+		}
+	},
 	tankPressure: {
 		gauge: document.getElementById('tank-gauge'),
 		readout: document.getElementById('tank-readout')
@@ -42,6 +72,7 @@ var ui = {
             'http://10.14.18.2:1182/?action=stream'
         ]
     },
+	pistonStreamOnly: document.getElementById('piston-stream-only'),
     theme: {
         select: document.getElementById('theme-select'),
         link: document.getElementById('theme-link')
@@ -130,25 +161,28 @@ function onValueChanged(key, value, isNew) {
 			} else {
 				s = 135;
 			}
-			NetworkTables.setValue(key, false);
+			NetworkTables.putValue(key, false);
 			break;
 		// TODO: This key violates naming policies. It's a robotpy inbuilt name, also.
 		case '/SmartDashboard/Autonomous Mode/options': // Load list of prewritten autonomous modes
 			// Clear previous list
-			while (ui.autoSelect.firstChild) {
-				ui.autoSelect.removeChild(ui.autoSelect.firstChild);
+			while (ui.auto.select.firstChild) {
+				ui.auto.select.removeChild(ui.auto.select.firstChild);
 			}
 			// Make an option for each autonomous mode and put it in the selector
 			for (i = 0; i < value.length; i++) {
 				var option = document.createElement('option');
 				option.innerHTML = value[i];
-				ui.autoSelect.appendChild(option);
+				ui.auto.select.appendChild(option);
 			}
 			// Set value to the already-selected mode. If there is none, nothing will happen.
-			ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedMode');
+			ui.auto.select.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedMode');
 			break;
 		case '/SmartDashboard/Autonomous Mode/selected':
-			ui.autoSelect.value = value;
+			ui.auto.select.value = value;
+			break;
+		case '/autonomous/Gear Place/position':
+			ui.auto.field.setPosition(value);
 			break;
 		case '/SmartDashboard/pneumatics/tank_pressure':
 			ui.tankPressure.gauge.style.width = value + 'px';
@@ -181,6 +215,11 @@ function onValueChanged(key, value, isNew) {
 			document.getElementById('rl_module').style.transform = 'rotate(' + value + 'deg)';
 		case '/SmartDashboard/drive/rr_module/degrees':
 			document.getElementById('rr_module').style.transform = 'rotate(' + value + 'deg)';
+		case '/SmartDashboard/camera':
+			ui.camera.id = value;
+			ui.camera.viewer.style.backgroundImage = 'url(' + ui.camera.srcs[ui.camera.id] + ')';
+			console.log('Camera stream source switched to ' + ui.camera.viewer.style.backgroundImage);
+			break;
 	}
 
 	// The following code manages tuning section of the interface.
@@ -215,15 +254,15 @@ function onValueChanged(key, value, isNew) {
 			switch (input.type) { // Figure out how to pass data based on input type
 				case 'checkbox':
 					// For booleans, send bool of whether or not checkbox is checked
-					NetworkTables.setValue(key, input.checked);
+					NetworkTables.putValue(key, input.checked);
 					break;
 				case 'number':
 					// For number values, send value of input as an int.
-					NetworkTables.setValue(key, parseInt(input.value));
+					NetworkTables.putValue(key, parseInt(input.value));
 					break;
 				case 'text':
 					// For normal text values, just send the value.
-					NetworkTables.setValue(key, input.value);
+					NetworkTables.putValue(key, input.value);
 					break;
 			}
 		};
@@ -244,26 +283,28 @@ function onValueChanged(key, value, isNew) {
 	}
 }
 
+// TODO: Clean up listners a bunch
+
 // Move Camera
 ui.cameraButtons.up.onclick = function() {
-	NetworkTables.setValue('/camera/gimbal/yaw', 0.5);
-	NetworkTables.setValue('/camera/gimbal/pitch', 1);
+	NetworkTables.putValue('/camera/gimbal/yaw', 0.5);
+	NetworkTables.putValue('/camera/gimbal/pitch', 1);
 };
 ui.cameraButtons.left.onclick = function() {
-	NetworkTables.setValue('/camera/gimbal/yaw', 1);
-	NetworkTables.setValue('/camera/gimbal/pitch', 0.5);
+	NetworkTables.putValue('/camera/gimbal/yaw', 1);
+	NetworkTables.putValue('/camera/gimbal/pitch', 0.5);
 };
 ui.cameraButtons.center.onclick = function() {
-	NetworkTables.setValue('/camera/gimbal/yaw', 0.5);
-	NetworkTables.setValue('/camera/gimbal/pitch', 0.5);
+	NetworkTables.putValue('/camera/gimbal/yaw', 0.5);
+	NetworkTables.putValue('/camera/gimbal/pitch', 0.5);
 };
 ui.cameraButtons.right.onclick = function() {
-	NetworkTables.setValue('/camera/gimbal/yaw', 0);
-	NetworkTables.setValue('/camera/gimbal/pitch', 0.5);
+	NetworkTables.putValue('/camera/gimbal/yaw', 0);
+	NetworkTables.putValue('/camera/gimbal/pitch', 0.5);
 };
 ui.cameraButtons.down.onclick = function() {
-	NetworkTables.setValue('/camera/gimbal/yaw', 0.5);
-	NetworkTables.setValue('/camera/gimbal/pitch', 0);
+	NetworkTables.putValue('/camera/gimbal/yaw', 0.5);
+	NetworkTables.putValue('/camera/gimbal/pitch', 0);
 };
 
 // Reset gyro value to 0 on click
@@ -278,18 +319,18 @@ ui.gyro.container.onclick = function() {
 
 // Open tuning section when button is clicked
 ui.tuning.button.onclick = function() {
-	if (ui.tuning.list.style.display === 'none') {
-		ui.tuning.list.style.display = 'block';
-	} else {
-		ui.tuning.list.style.display = 'none';
-	}
+	ui.tuning.list.style.display = (ui.tuning.list.style.display === 'none') ? 'block' : 'none';
 };
+
+ui.auto.button.onclick = function() {
+	ui.auto.panel.style.display = (ui.auto.panel.style.display === 'none') ? 'block' : 'none';
+}
 
 // Manages get and set buttons at the top of the tuning pane
 ui.tuning.set.onclick = function() {
 	// Make sure the inputs have content, if they do update the NT value
 	if (ui.tuning.name.value && ui.tuning.value.value) {
-		NetworkTables.setValue('/SmartDashboard/' + ui.tuning.name.value, ui.tuning.value.value);
+		NetworkTables.putValue('/SmartDashboard/' + ui.tuning.name.value, ui.tuning.value.value);
 	}
 };
 ui.tuning.get.onclick = function() {
@@ -297,19 +338,31 @@ ui.tuning.get.onclick = function() {
 };
 
 // Update NetworkTables when autonomous selector is changed
-ui.autoSelect.onchange = function() {
-	NetworkTables.setValue('/SmartDashboard/Autonomous Mode/selected', this.value);
+ui.auto.select.onchange = function() {
+	NetworkTables.putValue('/SmartDashboard/Autonomous Mode/selected', this.value);
 };
+
+// TODO: Update this from NT on load
+ui.auto.shoot.onchange = function() {
+	NetworkTables.putValue('/autonomous/Gear Place/shoot', this.checked)
+}
+
 ui.camera.viewer.onclick = function() {
     ui.camera.id += 1;
 	if (ui.camera.id === ui.camera.srcs.length) ui.camera.id = 0;
-	ui.camera.viewer.style.backgroundImage = 'url(' + ui.camera.srcs[ui.camera.id] + ')';
-	console.log('Camera stream source switched to ' + ui.camera.viewer.style.backgroundImage)
+	NetworkTables.putValue('/SmartDashboard/camera', ui.camera.id);
 };
-
-// Default to red
-NetworkTables.setValue('/SmartDashboard/theme', 'red');
 
 ui.theme.select.onchange = function() {
-    NetworkTables.setValue('/SmartDashboard/theme', this.value);
+    NetworkTables.putValue('/SmartDashboard/theme', this.value);
 };
+
+ui.pistonStreamOnly.onchange = function() {
+	NetworkTables.putValue('/camera/piston_stream_only', this.checked);
+}
+
+// There is no elegance here. Only sleep deprivation and regret.
+onclick = function(e) {
+	if (e.target.name == 'field-positions')
+		NetworkTables.putValue('/autonomous/Gear Place/position', ui.auto.field.getPosition());
+}

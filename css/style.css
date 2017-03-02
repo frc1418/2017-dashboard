@@ -112,6 +112,37 @@ header {
 #tuning p {
     margin-bottom: 10px;
 }
+#auto-warning {
+    display: none;
+    color: red;
+}
+#auto {
+    width: 35vw;
+    height: 100vh;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+#field, #field svg {
+    width: calc(54 * 8px);
+    height: calc(27 * 8px);
+}
+#field svg {
+    margin-bottom: calc(-27 * 8px);
+}
+#field svg rect {
+}
+.field-group {
+    display: inline-block;
+    width: 150px;
+}
+.field-group:first-of-type {
+    margin-top: 70px;
+    margin-left: 10px;
+}
+#shoot {
+    margin-top: 30px;
+}
 article {
     top: 0;
     left: 0;
@@ -130,8 +161,8 @@ svg * {
     fill: var(--svg-fill-color);
 }
 .svginvis {
-    Stroke: #222;
-    Stroke-width: 0;
+    stroke: #222;
+    stroke-width: 0;
 }
 .ballicons {}
 text {

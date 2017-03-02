@@ -15,9 +15,10 @@
         <!-- Tells whether robot is connected to dashboard. -->
         <div id="robot-state">Unknown state</div>
         <button id="tuning-button">Tuning</button>
+        <button id="auto-button">Auto</button>
         <p>Theme:</p>
         <div class="select-container">
-            <select id='theme-select'>
+            <select id="theme-select">
                 <option>dark</option>
                 <option>light</option>
                 <option>red</option>
@@ -34,6 +35,39 @@
         <input type="text" placeholder="Value" id="value">
         <button id="set">Set</button>
         <button id="get">Get</button>
+    </div>
+    <div id="auto" style="display: none;">
+        <!-- Autonomous selector -->
+        <div class="select-container">
+            <select id="auto-select">
+                <option>No auto modes found</option>
+                <!-- This gets populated by JS -->
+            </select>
+        </div>
+        <div id="field">
+            <svg>
+                <rect height="216" width="432" x="0" y="0" />
+                <line x1="0" y1="50" x2="100" y2="0" /> <!-- Top left line -->
+                <line x1="432" y1="50" x2="332" y2="0" /> <!-- Top right line -->
+                <line x1="0" y1="166" x2="60" y2="216" /> <!-- Bottom left line -->
+                <line x1="432" y1="166" x2="382" y2="216" /> <!-- Bottom right line -->
+                <circle cx="108" cy="108" r="30" /> <!-- Left airship -->
+                <circle cx="324" cy="108" r="30" /> <!-- Right airship -->
+                <line x1="216" y1="0" x2="216" y2="216" /> <!-- Center line -->
+            </svg>
+            <div class="field-group">
+                <label><input type="radio" name="field-positions" value="left"> Left</label><br>
+                <label><input type="radio" name="field-positions" value="middle_left"> Mid. left</label><br>
+                <label><input type="radio" name="field-positions" value="middle_right"> Mid. right</label><br>
+                <label><input type="radio" name="field-positions" value="right"> Right</label><br>
+            </div>
+            <div class="field-group">
+                <!--<label><input type="radio" name="field-positions" value="top_right"> Top right</label><br>
+                <label><input type="radio" name="field-positions" value="middle_right"> Middle right</label><br>
+                <label><input type="radio" name="field-positions" value="bottom_right"> Bottom right</label>-->
+            </div>
+        </div>
+        <label><input type="checkbox" id="shoot"> Shoot?</label>
     </div>
     <!-- The main body of the dashboard, by default contains the gyro monitor and the robot diagram -->
     <article>
@@ -75,13 +109,6 @@
     </article>
     <!-- The sidebar of the dashboard. Designed for smaller control elements like selection boxes and small buttons. -->
     <aside>
-        <!-- Autonomous selector -->
-        <div class="select-container">
-            <select id="auto-select">
-                <option>No auto modes found</option>
-                <!-- This gets populated by JS -->
-            </select>
-        </div>
         <svg id="camera-buttons" width="200" height="200">
               <rect id="camera-up" x="55" y="0" width="50" height="50"/>
               <rect id="camera-left" x="0" y="55" width="50" height="50"/>
@@ -96,6 +123,8 @@
                 <div id="tank-gauge"></div>
             </div>
         </div>
+        <label><input type="checkbox" id="piston-stream-only"> Only stream piston cam</label>
+        <div id="auto-warning">WARNING: Autonomous not configured!</div>
     </aside>
     <script src="/networktables/networktables.js"></script>
     <script src="ui.js"></script>
