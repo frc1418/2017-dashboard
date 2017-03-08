@@ -2,6 +2,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    --svg-fill-color: white;
+    --svg-fill-color-inverse: white;
 }
 ::-webkit-scrollbar {
     display: none;
@@ -16,11 +18,7 @@ body {
     overflow: hidden;
     background: #222;
 }
-button,
-input[type="text"],
-input[type="number"],
-.select-container,
-select {
+button, input[type="text"], input[type="number"], .select-container, select {
     color: white;
     background: #444;
     border: none;
@@ -37,10 +35,12 @@ select {
     border: none;
     background: none;
     color: white;
-    height: 25px;
+    height: 30px;
 }
-input[type="text"],
-input[type="number"] {
+option {
+    color: #333;
+}
+input[type="text"], input[type="number"] {
     cursor: text;
 }
 input[type="checkbox"] {
@@ -49,7 +49,8 @@ input[type="checkbox"] {
 }
 
 /* Major interface panes, aside, article, header, etc. */
-body > * {
+
+body>* {
     padding: 10px;
     position: fixed;
     overflow: scroll;
@@ -59,36 +60,51 @@ body > * {
     font-family: monospace;
     display: block;
     height: 20vh;
-    width: 30vw;
+    width: 25vw;
     top: 0;
-    left: 0;
+    left: 35vw;
     font-size: 20vh;
     line-height: .8;
 }
 header {
     width: 20vw;
-    height: 20vh;
+    height: 25vh;
     top: 0;
-    left: 30vw;
+    left: 60vw;
     color: white;
 }
 #camera {
     padding: 0;
     position: fixed;
     bottom: 0;
-    left: 0;
+    left: 35vw;
     width: 50vw;
     height: 80vh;
     overflow: hidden;
     background-color: #333;
     /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
-    background-image: url('LINK TO CAMERA SOURCE HERE');
+    background-image: url('http://10.14.18.2:1181/?action=stream');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#camera-buttons > rect {
+    transition: fill .2s;
+}
+#camera-buttons > rect:hover {
+    fill: var(--svg-fill-color-inverse);
+
+}
+#field-centric {
+    fill: #fe3131;
+}
+#fc-label {
+    fill: white;
 }
 #tuning {
     width: 50vw;
     height: 80vh;
     bottom: 0;
-    left: 0;
+    left: 35vw;
 }
 #tuning div {
     margin: 20px 0;
@@ -96,9 +112,40 @@ header {
 #tuning p {
     margin-bottom: 10px;
 }
+#auto-warning {
+    display: none;
+    color: red;
+}
+#auto {
+    width: 35vw;
+    height: 100vh;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+#field, #field svg {
+    width: calc(54 * 8px);
+    height: calc(27 * 8px);
+}
+#field svg {
+    margin-bottom: calc(-27 * 8px);
+}
+#field svg rect {
+}
+.field-group {
+    display: inline-block;
+    width: 150px;
+}
+.field-group:first-of-type {
+    margin-top: 70px;
+    margin-left: 10px;
+}
+#shoot {
+    margin-top: 30px;
+}
 article {
     top: 0;
-    left: 50vw;
+    left: 0;
     height: 100vh;
     width: 35vw;
 }
@@ -110,6 +157,14 @@ svg * {
     -ms-transform-origin: center;
     transform-origin: center;
 }
+.svgsolid {
+    fill: var(--svg-fill-color);
+}
+.svginvis {
+    stroke: #222;
+    stroke-width: 0;
+}
+.ballicons {}
 text {
     font-size: 16px;
     letter-spacing: 2px;
@@ -117,12 +172,8 @@ text {
     fill: white;
 }
 #gyro {
-    width: 175px;
-    height: 175px;
-    margin-left: 30px;
-    margin-top: 15px;
 }
-#gyro-arm {
+#gyro-robot {
     -webkit-transform-origin: bottom;
     -ms-transform-origin: bottom;
     transform-origin: bottom;
@@ -148,9 +199,23 @@ text {
 aside {
     right: 0;
     top: 0;
+    padding-left: 20px;
     width: 15vw;
     height: 100vh;
 }
-aside > * {
+aside>* {
     margin-bottom: 20px;
+}
+#tank-label, #tank-readout {
+    display: inline;
+}
+#tank-gauge-container {
+    height: 20px;
+    width: 120px;
+    background: #444;
+    overflow: hidden;
+}
+#tank-gauge {
+    height: 20px;
+    background: #555;
 }

@@ -10,13 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/frc1418/2017-dashboard"
   },
-  "author": "FRCDashboard",
+  "author": "Erik Boesen",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/frc1418/2017-dashboard"
   },
   "homepage": "http://1418.team",
   "devDependencies": {
-    "electron-prebuilt": "^1.2.0"
+    "electron": "^1.2.0"
   }
 }
