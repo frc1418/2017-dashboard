@@ -35,7 +35,6 @@ var ui = {
 		field: {
 			positions: document.getElementsByName('field-positions'),
 			getPosition: function() {
-				// TODO: Rewrite as `i in x` for cleanliness
 				for (i = 0; i < ui.auto.field.positions.length; i++)
 				    if (ui.auto.field.positions[i].checked) {
 				        return ui.auto.field.positions[i].value;
@@ -43,10 +42,9 @@ var ui = {
 				    }
 			},
 			setPosition: function(pos) {
-				// TODO: Rewrite as `i in x` for cleanliness
 				for (i = 0; i < ui.auto.field.positions.length; i++)
 				    if (ui.auto.field.positions[i].value == pos) {
-				        return ui.auto.field.positions[i].value;
+				        ui.auto.field.positions[i].checked = true;
 				        break;
 				    }
 			}
@@ -183,6 +181,9 @@ function onValueChanged(key, value, isNew) {
 			break;
 		case '/autonomous/Gear Place/position':
 			ui.auto.field.setPosition(value);
+			break;
+		case '/autonomous/Gear Place/shoot':
+			ui.auto.shoot.checked = value;
 			break;
 		case '/SmartDashboard/pneumatics/tank_pressure':
 			ui.tankPressure.gauge.style.width = value + 'px';
