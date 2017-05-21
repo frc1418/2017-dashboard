@@ -1,9 +1,9 @@
 # 2017 Dashboard
 [Robot Code](https://github.com/frc1418/2017-robot) | **Dashboard** | [Vision](https://github.com/frc1418/2017-vision)
 
-This is FIRST Robotics Team 1418's 2017 driving dashboard, built off of the FRC Dashboard web driving dashboard framework.
+This is FIRST Robotics Team 1418's 2017 driving dashboard, built off of the [FRC Dashboard](https://github.com/FRCDashboard/FRCDashboard) web driving dashboard framework.
 
-TODO: Screenshot here.
+![Screenshot](images/screenshot.png)
 
 ## Setup
 ### Dependencies
