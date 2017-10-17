@@ -49,7 +49,6 @@ var ui = {
 				    }
 			}
 		},
-		shoot: document.getElementById('shoot'),
 		select: document.getElementById('auto-select'),
 		warning: document.getElementById('auto-warning'),
 		updateWarning: function() {
@@ -181,9 +180,6 @@ function onValueChanged(key, value, isNew) {
 			break;
 		case '/autonomous/Gear Place/position':
 			ui.auto.field.setPosition(value);
-			break;
-		case '/autonomous/Gear Place/shoot':
-			ui.auto.shoot.checked = value;
 			break;
 		case '/SmartDashboard/pneumatics/tank_pressure':
 			ui.tankPressure.gauge.style.width = value + 'px';
@@ -347,11 +343,6 @@ ui.tuning.get.onclick = function() {
 ui.auto.select.onchange = function() {
 	NetworkTables.putValue('/SmartDashboard/Autonomous Mode/selected', this.value);
 };
-
-// TODO: Update this from NT on load
-ui.auto.shoot.onchange = function() {
-	NetworkTables.putValue('/autonomous/Gear Place/shoot', this.checked)
-}
 
 ui.camera.viewer.onclick = function() {
     ui.camera.id++;
